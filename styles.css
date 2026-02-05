@@ -2309,6 +2309,7 @@ select {
     margin-left: 5px;
     vertical-align: middle;
 }
+
 /* ============================================
    Instagram Feed
    ============================================ */
@@ -2326,7 +2327,7 @@ select {
 
 .insta-header i {
     font-size: 2rem;
-    background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -2358,7 +2359,7 @@ select {
 }
 
 .insta-item {
-    aspect-ratio: 1;
+    aspect-ratio: 9/16;
     background: var(--color-bg-tertiary);
     border-radius: var(--radius-md);
     position: relative;
@@ -2381,7 +2382,8 @@ select {
 
 .insta-placeholder::after {
     content: '\f16d';
-    font-family: "Font Awesome 6 Brands"; /* Ensure correct FA font-family */
+    font-family: "Font Awesome 6 Brands";
+    /* Ensure correct FA font-family */
     font-size: 2rem;
     color: var(--glass-border);
 }
