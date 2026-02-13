@@ -2327,8 +2327,9 @@ select {
 
 .insta-header i {
     font-size: 2rem;
-    background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -2365,6 +2366,14 @@ select {
     position: relative;
     overflow: hidden;
     transition: var(--transition-normal);
+}
+
+.insta-item iframe {
+    position: absolute;
+    top: -60px;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 120px);
 }
 
 .insta-item:hover {
