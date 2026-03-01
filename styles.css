@@ -1839,6 +1839,8 @@ select {
 /* ============================================
    Responsive Design
    ============================================ */
+
+/* ---------- 1200px: Tablet Landscape ---------- */
 @media (max-width: 1200px) {
     :root {
         --section-padding: 100px;
@@ -1851,9 +1853,19 @@ select {
     .why-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .insta-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
+/* ---------- 992px: Tablet Portrait ---------- */
 @media (max-width: 992px) {
+    :root {
+        --section-padding: 80px;
+    }
+
+    /* -- Navigation: Full-screen overlay -- */
     .nav-menu {
         position: fixed;
         top: 0;
@@ -1861,12 +1873,17 @@ select {
         width: 80%;
         max-width: 400px;
         height: 100vh;
-        background: var(--color-bg-secondary);
+        height: 100dvh;
+        background: rgba(17, 17, 17, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
         align-items: flex-start;
         padding: 100px 40px;
         gap: 0;
-        transition: var(--transition-normal);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+        z-index: 1001;
     }
 
     .nav-menu.active {
@@ -1875,23 +1892,79 @@ select {
 
     .nav-link {
         width: 100%;
-        padding: 16px 0;
+        padding: 18px 0;
+        font-size: 1.05rem;
         border-bottom: 1px solid var(--glass-border);
     }
 
     .nav-cta {
         width: 100%;
         text-align: center;
-        margin-top: 20px;
+        justify-content: center;
+        margin-top: 24px;
     }
 
     .nav-toggle {
         display: flex;
+        z-index: 1002;
     }
 
+    /* -- Hero Section -- */
+    .hero-content {
+        max-width: 700px;
+        padding: 0 24px;
+    }
+
+    .hero-badge {
+        margin-bottom: 24px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+        gap: 10px;
+        margin-bottom: 32px;
+    }
+
+    .hero-cta {
+        margin-bottom: 48px;
+    }
+
+    .hero-stats {
+        gap: 30px;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-suffix {
+        font-size: 1.6rem;
+    }
+
+    /* -- Stage lights: scale down -- */
+    .light-1 {
+        width: 300px;
+        height: 300px;
+    }
+
+    .light-2 {
+        width: 350px;
+        height: 350px;
+    }
+
+    .light-3 {
+        width: 500px;
+        height: 250px;
+    }
+
+    /* -- About -- */
     .about-grid {
         grid-template-columns: 1fr;
-        gap: 60px;
+        gap: 50px;
     }
 
     .about-image {
@@ -1899,20 +1972,24 @@ select {
         margin: 0 auto;
     }
 
+    /* -- Booking -- */
     .booking-wrapper {
         grid-template-columns: 1fr;
-        gap: 60px;
+        gap: 50px;
     }
 
+    /* -- Footer -- */
     .footer-main {
         grid-template-columns: 1fr;
-        gap: 60px;
+        gap: 50px;
     }
 
+    /* -- Testimonials -- */
     .testimonial-card {
         flex: 0 0 100%;
     }
 
+    /* -- Gallery -- */
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1921,21 +1998,61 @@ select {
         grid-column: span 1;
         grid-row: span 1;
     }
+
+    /* -- Section headers -- */
+    .section-header {
+        margin-bottom: 50px;
+    }
 }
 
+/* ---------- 768px: Mobile Landscape / Large Phone ---------- */
 @media (max-width: 768px) {
     :root {
-        --section-padding: 80px;
-        --container-padding: 20px;
+        --section-padding: 60px;
+        --container-padding: 16px;
+    }
+
+    /* -- Hero: Major mobile overhaul -- */
+    .hero {
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 80px 0 60px;
+    }
+
+    .hero-content {
+        padding: 0 16px;
+        max-width: 100%;
+    }
+
+    .hero-badge {
+        padding: 10px 18px;
+        font-size: 0.7rem;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .hero-badge i {
+        font-size: 0.55rem;
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 9vw, 3rem);
+        margin-bottom: 16px;
+        line-height: 1.15;
+    }
+
+    .hero-title br {
+        display: none;
     }
 
     .hero-subtitle {
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
+        margin-bottom: 28px;
+    }
+
+    .hero-subtitle .role {
+        font-size: 0.9rem;
     }
 
     .hero-subtitle .divider {
@@ -1944,28 +2061,142 @@ select {
 
     .hero-cta {
         flex-direction: column;
+        gap: 12px;
+        margin-bottom: 36px;
     }
 
     .btn {
         width: 100%;
         justify-content: center;
+        padding: 14px 28px;
+        font-size: 0.95rem;
     }
 
     .hero-stats {
-        flex-direction: column;
-        gap: 24px;
+        flex-direction: row;
+        gap: 0;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .stat-item {
+        flex: 1;
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
+    }
+
+    .stat-suffix {
+        font-size: 1.4rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
     }
 
     .stat-divider {
-        width: 50px;
-        height: 1px;
+        width: 1px;
+        height: 40px;
     }
 
+    .scroll-indicator {
+        bottom: 20px;
+        font-size: 0.7rem;
+    }
+
+    .scroll-indicator i {
+        font-size: 0.9rem;
+    }
+
+    /* -- Stage lights: minimal on mobile -- */
+    .light-1 {
+        width: 200px;
+        height: 200px;
+        top: -10%;
+        left: 0;
+    }
+
+    .light-2 {
+        width: 250px;
+        height: 250px;
+        top: -5%;
+        right: 0;
+    }
+
+    .light-3 {
+        width: 300px;
+        height: 150px;
+    }
+
+    /* -- Section headers -- */
+    .section-header {
+        margin-bottom: 40px;
+    }
+
+    .section-tag::before,
+    .section-tag::after {
+        display: none;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    /* -- About -- */
+    .about-narrative .lead {
+        font-size: 1.1rem;
+    }
+
+    .about-narrative p {
+        font-size: 0.95rem;
+    }
+
+    /* -- Services & Why grids -- */
     .services-grid,
     .why-grid {
         grid-template-columns: 1fr;
     }
 
+    /* -- Gallery: force overlays visible on touch -- */
+    .gallery-overlay {
+        transform: translateY(0);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+    }
+
+    /* -- Testimonials -- */
+    .testimonial-card {
+        padding: 30px 24px;
+    }
+
+    .testimonial-quote {
+        font-size: 0.95rem;
+        padding-left: 16px;
+    }
+
+    .client-avatar {
+        width: 48px;
+        height: 48px;
+    }
+
+    .client-avatar i {
+        font-size: 1.2rem;
+    }
+
+    .client-name {
+        font-size: 1rem;
+    }
+
+    /* -- Instagram grid -- */
+    .insta-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    /* -- Booking -- */
     .booking-form {
         grid-template-columns: 1fr;
     }
@@ -1977,55 +2208,319 @@ select {
     }
 
     .booking-form-wrapper {
-        padding: 30px;
+        padding: 24px;
+    }
+
+    .booking-title {
+        font-size: clamp(1.6rem, 5vw, 2.2rem);
+    }
+
+    /* -- Footer -- */
+    .footer {
+        padding: 50px 0 0;
     }
 
     .footer-links {
-        grid-template-columns: 1fr;
-        gap: 30px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
     }
 
+    .footer-desc {
+        font-size: 0.9rem;
+    }
+
+    /* -- Floating elements -- */
     .floating-cta {
-        bottom: 20px;
-        right: 20px;
+        bottom: 16px;
+        right: 16px;
+    }
+
+    .whatsapp-float {
+        width: 52px;
+        height: 52px;
+    }
+
+    .whatsapp-float i {
+        font-size: 1.5rem;
     }
 
     .back-to-top {
-        right: 90px;
-        bottom: 20px;
+        right: 80px;
+        bottom: 16px;
+        width: 42px;
+        height: 42px;
     }
 
-    .section-tag::before,
-    .section-tag::after {
-        display: none;
+    /* -- Client logos -- */
+    .logo-placeholder {
+        padding: 12px 20px;
+    }
+
+    .logo-placeholder i {
+        font-size: 1.5rem;
+    }
+
+    .logo-placeholder span {
+        font-size: 0.7rem;
+    }
+
+    .logos-title {
+        font-size: 0.8rem;
+        margin-bottom: 24px;
+    }
+
+    /* -- Why cards -- */
+    .why-icon {
+        width: 64px;
+        height: 64px;
+    }
+
+    .why-icon i {
+        font-size: 1.5rem;
     }
 }
 
+/* ---------- 480px: Small Phone ---------- */
 @media (max-width: 480px) {
+    :root {
+        --section-padding: 50px;
+        --container-padding: 14px;
+    }
+
+    /* -- Hero fine-tuning -- */
+    .hero {
+        padding: 70px 0 50px;
+    }
+
     .hero-badge {
-        padding: 10px 16px;
-        font-size: 0.75rem;
+        padding: 8px 14px;
+        font-size: 0.65rem;
+        gap: 6px;
     }
 
     .hero-title {
-        font-size: 2rem;
+        font-size: clamp(1.7rem, 8vw, 2.4rem);
+        margin-bottom: 14px;
     }
 
+    .hero-subtitle .role {
+        font-size: 0.8rem;
+    }
+
+    .hero-cta {
+        gap: 10px;
+        margin-bottom: 28px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+
+    .hero-stats {
+        gap: 0;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .stat-suffix {
+        font-size: 1.2rem;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+    }
+
+    .stat-divider {
+        height: 32px;
+    }
+
+    /* -- About: hide floating cards, tighten spacing -- */
     .floating-card {
         display: none;
     }
 
+    .about-image {
+        max-width: 100%;
+    }
+
+    .image-accent {
+        top: -10px;
+        right: -10px;
+    }
+
+    .about-narrative .lead {
+        font-size: 1rem;
+    }
+
+    .about-narrative p {
+        font-size: 0.9rem;
+        margin-bottom: 14px;
+    }
+
+    .about-signature {
+        gap: 12px;
+    }
+
+    .signature-name {
+        font-size: 1.2rem;
+    }
+
+    .signature-title {
+        font-size: 0.8rem;
+    }
+
+    /* -- Service & why cards -- */
     .service-card,
     .why-card {
-        padding: 30px;
+        padding: 24px;
     }
 
+    .service-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    .service-icon i {
+        font-size: 1.4rem;
+    }
+
+    .service-title {
+        font-size: 1.15rem;
+    }
+
+    .service-desc {
+        font-size: 0.9rem;
+    }
+
+    .service-number {
+        font-size: 2.5rem;
+        top: 20px;
+        right: 20px;
+    }
+
+    /* -- Testimonial cards -- */
     .testimonial-card {
-        padding: 30px;
+        padding: 24px 18px;
     }
 
+    .testimonial-quote {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+
+    /* -- Gallery -- */
     .gallery-grid {
         grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .gallery-item {
+        min-height: 200px;
+    }
+
+    /* -- Instagram grid: single column -- */
+    .insta-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .insta-header h3 {
+        font-size: 1.2rem;
+    }
+
+    /* -- Footer -- */
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .footer-social {
+        gap: 8px;
+    }
+
+    .social-link {
+        width: 38px;
+        height: 38px;
+    }
+
+    /* -- Nav menu on small phones -- */
+    .nav-menu {
+        width: 100%;
+        max-width: 100%;
+        padding: 90px 24px;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+        padding: 14px 0;
+    }
+
+    /* -- Booking -- */
+    .booking-features {
+        gap: 18px;
+    }
+
+    .booking-feature i {
+        font-size: 1.1rem;
+    }
+
+    .booking-feature h4 {
+        font-size: 0.95rem;
+    }
+
+    .booking-feature p {
+        font-size: 0.85rem;
+    }
+
+    /* -- Carousel controls -- */
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .carousel-controls {
+        gap: 14px;
+        margin-top: 24px;
+    }
+
+    /* -- Video container -- */
+    .video-container {
+        border-radius: var(--radius-md);
+    }
+}
+
+/* ---------- 360px: Very Small Phone ---------- */
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 1.6rem;
+    }
+
+    .hero-badge {
+        font-size: 0.6rem;
+        padding: 7px 12px;
+    }
+
+    .hero-subtitle .role {
+        font-size: 0.75rem;
+    }
+
+    .stat-number {
+        font-size: 1.3rem;
+    }
+
+    .stat-suffix {
+        font-size: 1rem;
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
     }
 }
 
@@ -2360,7 +2855,7 @@ select {
 }
 
 .insta-item {
-    aspect-ratio: 9/16;
+    aspect-ratio: 1 / 1.35;
     background: var(--color-bg-tertiary);
     border-radius: var(--radius-md);
     position: relative;
@@ -2370,10 +2865,10 @@ select {
 
 .insta-item iframe {
     position: absolute;
-    top: -60px;
+    top: -50px;
     left: 0;
     width: 100%;
-    height: calc(100% + 300px);
+    height: calc(100% + 200px);
 }
 
 .insta-item:hover {
@@ -2399,6 +2894,8 @@ select {
 
 @media (max-width: 768px) {
     .insta-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
     }
 }
