@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initBackToTop();
     initHoFCarousel();
+    initCustomCursor();
+    initTextReveal();
+    initMeshGradients();
 
 });
 
@@ -570,39 +573,110 @@ if ('ontouchstart' in window) {
 
 
 /**
- * Hall of Fame Carousel
+ * Custom Cursor
  */
-function initHoFCarousel() {
-    const track = document.getElementById('hofTrack');
-    const prevBtn = document.getElementById('hofPrev');
-    const nextBtn = document.getElementById('hofNext');
+function initCustomCursor() {
+    if ('ontouchstart' in window) return;
 
-    if (!track || !prevBtn || !nextBtn) return;
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    const follower = document.createElement('div');
+    follower.className = 'custom-cursor-follower';
+    document.body.appendChild(cursor);
+    document.body.appendChild(follower);
 
-    const slides = track.querySelectorAll('.hof-slide');
-    let currentIndex = 0;
+    let posX = 0, posY = 0;
+    let mouseX = 0, mouseY = 0;
 
-    function updateSlide() {
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+    });
+
+    // Smooth follower
+    function animate() {
+        posX += (mouseX - posX) * 0.1;
+        posY += (mouseY - posY) * 0.1;
+
+        follower.style.left = posX + 'px';
+        follower.style.top = posY + 'px';
+
+        requestAnimationFrame(animate);
     }
+    animate();
 
-    nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateSlide();
+    // Interaction states
+    const interactables = document.querySelectorAll('a, button, .service-card, .why-card, .gallery-item');
+    interactables.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            follower.classList.add('active');
+            cursor.classList.add('active');
+        });
+        el.addEventListener('mouseleave', () => {
+            follower.classList.remove('active');
+            cursor.classList.remove('active');
+        });
     });
-
-    prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        updateSlide();
-    });
-
-    // Auto slide every 5 seconds
-    setInterval(() => {
-        if (!document.hidden) {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateSlide();
-        }
-    }, 5000);
 }
 
-console.log('🎭 Deepak Portfolio - Ready to rock the stage!');
+/**
+ * Text Reveal Animation
+ */
+function initTextReveal() {
+    const revealElements = document.querySelectorAll('.section-title, .hero-title');
+
+    revealElements.forEach(el => {
+        const text = el.innerText;
+        el.innerHTML = '';
+
+        // Split by words or lines for better control
+        const words = text.split(' ');
+        words.forEach((word, i) => {
+            const spanContainer = document.createElement('span');
+            spanContainer.className = 'reveal-container';
+
+            const spanText = document.createElement('span');
+            spanText.className = 'reveal-text';
+            spanText.innerText = word + (i === words.length - 1 ? '' : ' ');
+
+            spanContainer.appendChild(spanText);
+            el.appendChild(spanContainer);
+        });
+    });
+
+    // Observe for reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const spans = entry.target.querySelectorAll('.reveal-text');
+                spans.forEach((span, i) => {
+                    setTimeout(() => {
+                        span.classList.add('visible');
+                    }, i * 100);
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => observer.observe(el));
+}
+
+/**
+ * Mesh Gradients Background
+ */
+function initMeshGradients() {
+    const mesh = document.createElement('div');
+    mesh.className = 'mesh-gradient-bg';
+    mesh.innerHTML = `
+        <div class="mesh-blob blob-1"></div>
+        <div class="mesh-blob blob-2"></div>
+        <div class="mesh-blob blob-3"></div>
+    `;
+    document.body.prepend(mesh);
+}
+
+console.log('🎭 Deepak Portfolio - Premium Overhaul Complete!');
